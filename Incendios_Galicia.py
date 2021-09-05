@@ -116,9 +116,7 @@ st.sidebar.subheader('Valores para predicción:')
 
 var1 = st.sidebar.number_input('Superficie', min_value=0.00, max_value=10000.00, step=100.00)
 var2 = st.sidebar.number_input('Time_ctrl', min_value=0.00, max_value=1000.00, step=50.00)
-#var3 = st.sidebar.selectbox('Precipitación:', ['Si','No'])
 var3 = st.sidebar.number_input('Medios', min_value=0, max_value=50, step=5)
-#var4 = st.sidebar.number_input('Time_ext', min_value=0, max_value=100, step=5)
 var4 = st.sidebar.number_input('PRES_RANGE', min_value=0.00, max_value=15.00, step=1.00) 
 var5 = st.sidebar.number_input('Sol', min_value=0.00, max_value=1000.00, step=50.00)
 var6 = st.sidebar.number_input('Personal', min_value=0, max_value=100, step=5)
@@ -126,38 +124,9 @@ var7 = st.sidebar.number_input('Racha', min_value=0.00, max_value=100.00, step=5
 var8 = st.sidebar.number_input('Longitud', min_value=-10.00, max_value=-6.00, step=0.05)
 var9 = st.sidebar.number_input('Latitud', min_value=41.00, max_value=44.00, step=0.05)
 var10 = st.sidebar.number_input('Año', min_value=2001, max_value=2015, step=1)
-#var11 = st.sidebar.number_input('TMAX', min_value=-30, max_value=50, step=1)
 var11 = st.sidebar.number_input('Temperatura MEDIA', min_value=-30.00, max_value=50.00, step=5.00)
-#var12 = st.sidebar.number_input('Medios', min_value=0, max_value=50, step=5)
-#var13 = st.sidebar.number_input('PRES_RANGE', min_value=0.00, max_value=15.00, step=1.00)  
-  
-st.sidebar.markdown('__________________________________________________________________________')  
 
-#image = Image.open('./images/IMG2.png')
-#st.image(image, caption='UCM')          
-    
-st.sidebar.write('')
-st.sidebar.write('Universidad Complutense de Madrid')
-st.sidebar.write('MÁSTER BIG DATA & DATA SCIENCE')
-st.sidebar.write('Madrid - Septiembre 2021')
-st.sidebar.write('______________________________________________________________________')
-st.sidebar.write('**AUTORES:**')
-st.sidebar.markdown(' - Alejandra García Mosquera')
-st.sidebar.markdown(' - Jorge Gómez Marco')
-st.sidebar.markdown(' - Ana Hernández Villate')
-st.sidebar.markdown(' - Alex Ilundain')
-st.sidebar.markdown(' - Alicia María López Machado')
-st.sidebar.markdown(' - Lenuta Morianu')
- 
-  
-  
-  
-# Preguntar por el tamaño del dataset de TEST
-test_size = st.sidebar.slider(label = 'Elige el tamaño del dataset de TEST (%):',
-                              min_value=0,
-                              max_value=100,
-                              value=15,
-                              step=1)
+st.write('')
 
 boton_prediccion = st.sidebar.button('REALIZAR PREDICCIÓN')
 
@@ -178,6 +147,34 @@ if boton_prediccion:
   if result == 4: st.write('CAUSA incendio: **FUEGO REPRODUCIDO**')
   if result == 5: st.write('CAUSA incendio: **RAYO**')
   
+
+  
+st.sidebar.markdown('__________________________________________________________________________')  
+
+#image = Image.open('./images/IMG2.png')
+#st.image(image, caption='UCM')          
+    
+st.sidebar.write('')
+st.sidebar.write('Universidad Complutense de Madrid')
+st.sidebar.write('MÁSTER BIG DATA & DATA SCIENCE')
+st.sidebar.write('Madrid - Septiembre 2021')
+st.sidebar.write('______________________________________________________________________')
+st.sidebar.write('**AUTORES:**')
+st.sidebar.markdown(' - Alejandra García Mosquera')
+st.sidebar.markdown(' - Jorge Gómez Marco')
+st.sidebar.markdown(' - Ana Hernández Villate')
+st.sidebar.markdown(' - Alex Ilundain')
+st.sidebar.markdown(' - Alicia María López Machado')
+st.sidebar.markdown(' - Lena Morianu')
+ 
   
   
+  
+# Preguntar por el tamaño del dataset de TEST
+test_size = st.sidebar.slider(label = 'Elige el tamaño del dataset de TEST (%):',
+                              min_value=0,
+                              max_value=100,
+                              value=15,
+                              step=1)
+
 
