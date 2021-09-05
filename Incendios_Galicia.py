@@ -171,10 +171,10 @@ st.sidebar.markdown(' - Lena Morianu')
   
   
 # Preguntar por el tamaño del dataset de TEST
-test_size = st.sidebar.slider(label = 'Elige el tamaño del dataset de TEST (%):',
-                              min_value=0,
-                              max_value=100,
-                              value=15,
-                              step=1)
+#test_size = st.sidebar.slider(label = 'Elige el tamaño del dataset de TEST (%):',
+#                              min_value=0,
+#                              max_value=100,
+#                              value=15,
+#                              step=1)
 
 
