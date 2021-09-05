@@ -1,0 +1,344 @@
+<link rel="stylesheet" href="static/overview.css">
+<!doctype html>
+<head>
+<title>Overview</title>
+<link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="static/style.css">
+<script src="https://cdn.bokeh.org/bokeh/release/bokeh-2.3.0.min.js"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.bokeh.org/bokeh/release/bokeh-widgets-2.3.0.min.js"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.bokeh.org/bokeh/release/bokeh-tables-2.3.0.min.js"
+        crossorigin="anonymous"></script>
+</head>
+<body>
+
+    <div class="main">
+        <div class="menu">
+            <div>
+Overview
+</div>
+            <div><a href="overview.html">Overview</a></div>
+            <div><a href="features.html">Features</a></div>
+            <div><a href="models.html">Models</a></div>
+        </div>
+        <div class="content">
+            
+
+<div class="describe-tables">
+    <div class="describe">
+        <div class="section-title">Numeric</div>
+        <div><table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th></th>
+<th>count</th>
+<th>mean</th>
+<th>std</th>
+<th>min</th>
+<th>25%</th>
+<th>50%</th>
+<th>75%</th>
+<th>max</th>
+<th>missing</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th><p class="elem-w-desc">Ano<span>Description not Available</span></p></th>
+<td>12976.00</td>
+<td>2005.59</td>
+<td>3.83</td>
+<td>2001.00</td>
+<td>2003.00</td>
+<td>2005.00</td>
+<td>2009.00</td>
+<td>2015.00</td>
+<td>0.00</td>
+</tr>
+<tr>
+<th><p class="elem-w-desc">Latitud<span>Description not Available</span></p></th>
+<td>12976.00</td>
+<td>42.56</td>
+<td>0.45</td>
+<td>41.83</td>
+<td>42.19</td>
+<td>42.47</td>
+<td>42.93</td>
+<td>43.73</td>
+<td>0.00</td>
+</tr>
+<tr>
+<th><p class="elem-w-desc">Longitud<span>Description not Available</span></p></th>
+<td>12976.00</td>
+<td>-7.99</td>
+<td>0.56</td>
+<td>-9.29</td>
+<td>-8.42</td>
+<td>-7.99</td>
+<td>-7.56</td>
+<td>-6.77</td>
+<td>0.00</td>
+</tr>
+<tr>
+<th><p class="elem-w-desc">Personal<span>Description not Available</span></p></th>
+<td>12976.00</td>
+<td>12.28</td>
+<td>7.25</td>
+<td>0.00</td>
+<td>6.00</td>
+<td>11.00</td>
+<td>16.00</td>
+<td>33.00</td>
+<td>0.00</td>
+</tr>
+<tr>
+<th><p class="elem-w-desc">Presion<span>Description not Available</span></p></th>
+<td>12976.00</td>
+<td>3.84</td>
+<td>1.64</td>
+<td>0.00</td>
+<td>2.60</td>
+<td>3.60</td>
+<td>4.90</td>
+<td>8.60</td>
+<td>0.00</td>
+</tr>
+<tr>
+<th><p class="elem-w-desc">Racha<span>Description not Available</span></p></th>
+<td>12976.00</td>
+<td>8.54</td>
+<td>3.30</td>
+<td>1.70</td>
+<td>6.10</td>
+<td>8.10</td>
+<td>10.60</td>
+<td>28.30</td>
+<td>0.00</td>
+</tr>
+<tr>
+<th><p class="elem-w-desc">Sol<span>Description not Available</span></p></th>
+<td>12976.00</td>
+<td>8.55</td>
+<td>3.55</td>
+<td>0.00</td>
+<td>6.50</td>
+<td>9.40</td>
+<td>11.20</td>
+<td>14.80</td>
+<td>0.00</td>
+</tr>
+<tr>
+<th><p class="elem-w-desc">Superficie_quemada<span>Description not Available</span></p></th>
+<td>12976.00</td>
+<td>2.59</td>
+<td>1.86</td>
+<td>1.00</td>
+<td>1.25</td>
+<td>2.00</td>
+<td>3.00</td>
+<td>10.20</td>
+<td>0.00</td>
+</tr>
+<tr>
+<th><p class="elem-w-desc">Temperatura_media<span>Description not Available</span></p></th>
+<td>12976.00</td>
+<td>16.58</td>
+<td>5.95</td>
+<td>-1.30</td>
+<td>12.40</td>
+<td>17.40</td>
+<td>21.10</td>
+<td>31.20</td>
+<td>0.00</td>
+</tr>
+<tr>
+<th><p class="elem-w-desc">Tiempo_control<span>Description not Available</span></p></th>
+<td>12976.00</td>
+<td>1.78</td>
+<td>0.89</td>
+<td>0.04</td>
+<td>1.17</td>
+<td>1.50</td>
+<td>2.31</td>
+<td>4.19</td>
+<td>0.00</td>
+</tr>
+</tbody>
+</table></div>
+    </div>
+    <div class="describe">
+        <div class="section-title">Categorical</div>
+        <div><table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th></th>
+<th>count</th>
+<th>mean</th>
+<th>std</th>
+<th>min</th>
+<th>25%</th>
+<th>50%</th>
+<th>75%</th>
+<th>max</th>
+<th>missing</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th><p class="elem-w-desc">Medios<span>Description not Available<br/><br/>Category - Original<br/>1 - 0<br/>2 - 1<br/>3 - 2<br/>4 - 3<br/>5 - 4<br/>6 - 5<br/>7 - 6<br/>8 - 7<br/>9 - 8</span></p></th>
+<td>12976.00</td>
+<td>2.96</td>
+<td>1.67</td>
+<td>1.00</td>
+<td>2.00</td>
+<td>3.00</td>
+<td>4.00</td>
+<td>9.00</td>
+<td>0.00</td>
+</tr>
+<tr>
+<th><p class="elem-w-desc">None<span>Description not Available<br/><br/>Category - Original<br/>1 - 1<br/>2 - 2<br/>3 - 3<br/>4 - 4<br/>5 - 5</span></p></th>
+<td>12976.00</td>
+<td>1.23</td>
+<td>0.67</td>
+<td>1.00</td>
+<td>1.00</td>
+<td>1.00</td>
+<td>1.00</td>
+<td>5.00</td>
+<td>0.00</td>
+</tr>
+</tbody>
+</table></div>
+    </div>
+    <div class="describe-unused">
+        <div class="section-title">Unused Columns</div>
+        <div><ul></ul></div>
+    </div>
+</div>
+<div class="head">
+    <div class="section-title">First 5 rows of data (transposed)</div>
+    <div><table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th></th>
+<th>0</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th><p class="elem-w-desc">Ano<span>Description not Available</span></p></th>
+<td>2001.00</td>
+<td>2001.00</td>
+<td>2001.00</td>
+<td>2001.00</td>
+<td>2001.00</td>
+</tr>
+<tr>
+<th><p class="elem-w-desc">Latitud<span>Description not Available</span></p></th>
+<td>43.70</td>
+<td>43.19</td>
+<td>43.70</td>
+<td>42.76</td>
+<td>43.06</td>
+</tr>
+<tr>
+<th><p class="elem-w-desc">Longitud<span>Description not Available</span></p></th>
+<td>-8.04</td>
+<td>-8.69</td>
+<td>-7.98</td>
+<td>-8.92</td>
+<td>-9.24</td>
+</tr>
+<tr>
+<th><p class="elem-w-desc">Medios<span>Description not Available<br/><br/>Category - Original<br/>1 - 0<br/>2 - 1<br/>3 - 2<br/>4 - 3<br/>5 - 4<br/>6 - 5<br/>7 - 6<br/>8 - 7<br/>9 - 8</span></p></th>
+<td>2.00</td>
+<td>0.00</td>
+<td>1.00</td>
+<td>2.00</td>
+<td>1.00</td>
+</tr>
+<tr>
+<th><p class="elem-w-desc">None<span>Description not Available<br/><br/>Category - Original<br/>1 - 1<br/>2 - 2<br/>3 - 3<br/>4 - 4<br/>5 - 5</span></p></th>
+<td>3.00</td>
+<td>1.00</td>
+<td>3.00</td>
+<td>2.00</td>
+<td>1.00</td>
+</tr>
+<tr>
+<th><p class="elem-w-desc">Personal<span>Description not Available</span></p></th>
+<td>14.00</td>
+<td>5.00</td>
+<td>9.00</td>
+<td>18.00</td>
+<td>14.00</td>
+</tr>
+<tr>
+<th><p class="elem-w-desc">Presion<span>Description not Available</span></p></th>
+<td>4.40</td>
+<td>4.70</td>
+<td>3.20</td>
+<td>3.20</td>
+<td>3.20</td>
+</tr>
+<tr>
+<th><p class="elem-w-desc">Racha<span>Description not Available</span></p></th>
+<td>16.90</td>
+<td>11.10</td>
+<td>13.90</td>
+<td>13.90</td>
+<td>13.90</td>
+</tr>
+<tr>
+<th><p class="elem-w-desc">Sol<span>Description not Available</span></p></th>
+<td>10.20</td>
+<td>10.20</td>
+<td>12.10</td>
+<td>12.10</td>
+<td>12.10</td>
+</tr>
+<tr>
+<th><p class="elem-w-desc">Superficie_quemada<span>Description not Available</span></p></th>
+<td>5.00</td>
+<td>1.50</td>
+<td>1.50</td>
+<td>1.10</td>
+<td>1.50</td>
+</tr>
+<tr>
+<th><p class="elem-w-desc">Temperatura_media<span>Description not Available</span></p></th>
+<td>11.30</td>
+<td>9.00</td>
+<td>13.90</td>
+<td>13.90</td>
+<td>13.90</td>
+</tr>
+<tr>
+<th><p class="elem-w-desc">Tiempo_control<span>Description not Available</span></p></th>
+<td>3.55</td>
+<td>2.05</td>
+<td>1.50</td>
+<td>3.10</td>
+<td>1.35</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="pairplot">
+    <div class="section-title">Pairplot of Features</div>
+    <div class="pairplot-img"><div>Plot was turned off because of too many features present in the data. Reduce the number of features or call 'create_dashboard' with 'force_pairplot=True' argument.</div></div>
+</div>
+
+
+        </div>
+        <div class="footer">
+            Created on 05-Sep-2021 21:56:39
+        </div>
+    </div>
+</body>
