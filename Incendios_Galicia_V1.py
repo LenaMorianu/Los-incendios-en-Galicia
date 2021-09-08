@@ -13,6 +13,7 @@ from sklearn.metrics import accuracy_score, auc, confusion_matrix, f1_score, pre
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import multilabel_confusion_matrix, plot_confusion_matrix, classification_report
+from imblearn.over_sampling import SMOTE
 
 st.set_page_config( page_title="Incendios en Galicia",
                    #page_icon="🧊",
@@ -65,21 +66,67 @@ st.table(df.head())
 
 
 
+############
+
+df_1 = df[df['Causa']==1].copy()
+df_1.reset_index(drop=True, inplace=True)
+
+df_resto = df[df['Causa']!=1].copy()
+df_resto.reset_index(drop=True, inplace=True)
+
+df_1_6 = df_1.iloc[5600:6720,:]
+
+
+df_prueba6 = pd.concat([df_1_6, df_resto])
+df_prueba6.reset_index(drop=True, inplace=True)
+
+############
+
+
+X_train, X_test, y_train, y_test = train_test_split (df_prueba6.drop(['Causa'],axis=1), 
+                                                     df_prueba6.Causa , 
+                                                     test_size = 0.3, 
+                                                     random_state = 333, 
+                                                     stratify = df_prueba6.Causa)
+
+oversample3 = SMOTE(random_state=19, sampling_strategy='all')
+X_train_SMOTE, y_train_SMOTE = oversample3.fit_resample(X_train, y_train)
+
+
+classifier = RandomForestClassifier(bootstrap = True, 
+                                    criterion= 'entropy', 
+                                    max_depth=None, 
+                                    random_state = 13,
+                                    n_estimators=150,
+                                    class_weight='balanced').fit(X_train_SMOTE, y_train_SMOTE)
+
+classifier.score(X_test, y_test)
+
+y_pred = classifier.predict(X_test)
+LABELS=['Intencionado', 'Causa desconocida', 'Negligencia', 'Fuego reproducido', ' Rayo']
+st.write(print(classification_report(y_test, y_pred))
+
+
+
+############
+
 # Crear los dataset de TRAIN y TEST
-X_train, X_test, y_train, y_test = train_test_split(df.drop(['Causa'], axis = 1),
-                                                    df['Causa'],
-                                                    train_size   = 0.8,
-                                                    random_state = 1234,
-                                                    shuffle      = True,
-                                                    stratify = df['Causa'])
+#X_train, X_test, y_train, y_test = train_test_split(df.drop(['Causa'], axis = 1),
+#                                                    df['Causa'],
+#                                                    train_size   = 0.8,
+#                                                    random_state = 1234,
+#                                                    shuffle      = True,
+#                                                    stratify = df['Causa'])
 
 
 
-modelo = RandomForestClassifier(bootstrap = True, 
-                                criterion= 'entropy', 
-                                max_depth=None, 
-                                n_estimators=150,
-                                class_weight='balanced').fit(X_train, y_train)
+#modelo = RandomForestClassifier(bootstrap = True, 
+#                                criterion= 'entropy', 
+#                                max_depth=None, 
+#                                n_estimators=150,
+#                                class_weight='balanced').fit(X_train, y_train)
+
+
 
 st.write("El TEST SCORING: {0:.2f} %".format(100 * modelo.score(X_test, y_test)))
 
@@ -93,7 +140,8 @@ st.write('')
 
 #st.table(classification_report(y_test, y_pred))
 
-y_proba = pd.DataFrame(modelo.predict_proba(X_test))
+# y_proba = pd.DataFrame(modelo.predict_proba(X_test))      
+y_proba = pd.DataFrame(classifier.predict_proba(X_test))
 y_proba.columns = y_proba.columns.map({0:'Intencionado',
                                        1:'Causa_desconocida',
                                        2:'Negligencia',
@@ -116,9 +164,7 @@ st.sidebar.subheader('Valores para predicción:')
 
 var1 = st.sidebar.number_input('Superficie', min_value=0.00, max_value=10000.00, step=100.00)
 var2 = st.sidebar.number_input('Time_ctrl', min_value=0.00, max_value=1000.00, step=50.00)
-#var3 = st.sidebar.selectbox('Precipitación:', ['Si','No'])
 var3 = st.sidebar.number_input('Medios', min_value=0, max_value=50, step=5)
-#var4 = st.sidebar.number_input('Time_ext', min_value=0, max_value=100, step=5)
 var4 = st.sidebar.number_input('PRES_RANGE', min_value=0.00, max_value=15.00, step=1.00) 
 var5 = st.sidebar.number_input('Sol', min_value=0.00, max_value=1000.00, step=50.00)
 var6 = st.sidebar.number_input('Personal', min_value=0, max_value=100, step=5)
@@ -126,10 +172,33 @@ var7 = st.sidebar.number_input('Racha', min_value=0.00, max_value=100.00, step=5
 var8 = st.sidebar.number_input('Longitud', min_value=-10.00, max_value=-6.00, step=0.05)
 var9 = st.sidebar.number_input('Latitud', min_value=41.00, max_value=44.00, step=0.05)
 var10 = st.sidebar.number_input('Año', min_value=2001, max_value=2015, step=1)
-#var11 = st.sidebar.number_input('TMAX', min_value=-30, max_value=50, step=1)
 var11 = st.sidebar.number_input('Temperatura MEDIA', min_value=-30.00, max_value=50.00, step=5.00)
-#var12 = st.sidebar.number_input('Medios', min_value=0, max_value=50, step=5)
-#var13 = st.sidebar.number_input('PRES_RANGE', min_value=0.00, max_value=15.00, step=1.00)  
+
+st.write('')
+
+boton_prediccion = st.sidebar.button('REALIZAR PREDICCIÓN')
+
+
+# Realizar la predicción
+if boton_prediccion:
+  values =[var1,var2,var3,var4,var5,var6,var7,var8,var9,var10,var11]
+  #columnas = list(df.columns.drop(['Causa']))
+  columnas = list(df_prueba6.columns.drop(['Causa']))
+  df_pred = pd.DataFrame(values, columnas)  
+  pred = [list(df_pred[0])]
+  #result = modelo.predict(pred)
+  #prob = modelo.predict_proba(pred)       
+  result = classifier.predict(pred)
+  prob = classifier.predict_proba(pred)
+  
+  
+  if result == 1: st.write('CAUSA incendio: **INTENCIONADO**')
+  if result == 2: st.write('CAUSA incendio: **CAUSA DESCONOCIDA**')
+  if result == 3: st.write('CAUSA incendio: **NEGLIGENCIA INTENCIONADO**')
+  if result == 4: st.write('CAUSA incendio: **FUEGO REPRODUCIDO**')
+  if result == 5: st.write('CAUSA incendio: **RAYO**')
+  
+
   
 st.sidebar.markdown('__________________________________________________________________________')  
 
@@ -147,37 +216,16 @@ st.sidebar.markdown(' - Jorge Gómez Marco')
 st.sidebar.markdown(' - Ana Hernández Villate')
 st.sidebar.markdown(' - Alex Ilundain')
 st.sidebar.markdown(' - Alicia María López Machado')
-st.sidebar.markdown(' - Lenuta Morianu')
+st.sidebar.markdown(' - Lena Morianu')
  
   
   
   
 # Preguntar por el tamaño del dataset de TEST
-test_size = st.sidebar.slider(label = 'Elige el tamaño del dataset de TEST (%):',
-                              min_value=0,
-                              max_value=100,
-                              value=15,
-                              step=1)
+#test_size = st.sidebar.slider(label = 'Elige el tamaño del dataset de TEST (%):',
+#                              min_value=0,
+#                              max_value=100,
+#                              value=15,
+#                              step=1)
 
-boton_prediccion = st.sidebar.button('REALIZAR PREDICCIÓN')
-
-
-# Realizar la predicción
-if boton_prediccion:
-  values =[var1,var2,var3,var4,var5,var6,var7,var8,var9,var10,var11]
-  columnas = list(df.columns.drop(['Causa']))
-  df_pred = pd.DataFrame(values, columnas)
-  pred = [list(df_pred[0])]
-  result = modelo.predict(pred)
-  prob = modelo.predict_proba(pred)
-  
-  
-  if result == 1: st.write('CAUSA incendio: **INTENCIONADO**')
-  if result == 2: st.write('CAUSA incendio: **CAUSA DESCONOCIDA**')
-  if result == 3: st.write('CAUSA incendio: **NEGLIGENCIA INTENCIONADO**')
-  if result == 4: st.write('CAUSA incendio: **FUEGO REPRODUCIDO**')
-  if result == 5: st.write('CAUSA incendio: **RAYO**')
-  
-  
-  
 
