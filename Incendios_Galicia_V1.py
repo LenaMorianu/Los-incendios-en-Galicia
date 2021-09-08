@@ -106,7 +106,9 @@ y_pred = classifier.predict(X_test)
 
 LABELS=['Intencionado', 'Causa desconocida', 'Negligencia', 'Fuego reproducido', ' Rayo']
 
-st.write('CLASSIFICATION REPORT:\n', print(classification_report(y_test, y_pred)))
+st.write('CLASSIFICATION REPORT:')
+st.write('')
+st.markdown(print(classification_report(y_test, y_pred)))
 
 
 
