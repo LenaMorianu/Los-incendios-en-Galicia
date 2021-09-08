@@ -128,7 +128,7 @@ st.write(print(classification_report(y_test, y_pred))
 
 
 
-st.write("El TEST SCORING: {0:.2f} %".format(100 * classifier.score(X_test, y_test)))
+#st.write("El TEST SCORING: {0:.2f} %".format(100 * classifier.score(X_test, y_test)))
 #st.write("El TEST SCORING: {0:.2f} %".format(100 * modelo.score(X_test, y_test)))         
 
 #st.table(plot_confusion_matrix(modelo, X_test, y_test, normalize='true'))
