@@ -103,8 +103,10 @@ classifier = RandomForestClassifier(bootstrap = True,
 classifier.score(X_test, y_test)
 
 y_pred = classifier.predict(X_test)
+
 LABELS=['Intencionado', 'Causa desconocida', 'Negligencia', 'Fuego reproducido', ' Rayo']
-st.write(print(classification_report(y_test, y_pred)))
+
+st.table(print(classification_report(y_test, y_pred)))
 
 
 
