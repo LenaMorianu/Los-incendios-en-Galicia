@@ -1,0 +1,183 @@
+#!/usr/bin/env python
+# coding: utf-8
+
+import streamlit as st
+from PIL import Image
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import bokeh
+from bokeh.plotting import figure
+#import pickle
+from sklearn.metrics import accuracy_score, auc, confusion_matrix, f1_score, precision_score, recall_score, roc_curve
+from sklearn.model_selection import train_test_split
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import multilabel_confusion_matrix, plot_confusion_matrix, classification_report
+
+st.set_page_config( page_title="Incendios en Galicia",
+                   #page_icon="🧊",
+                   layout="wide",
+                   initial_sidebar_state="expanded")
+
+
+
+st.title('Análisis y predicción de incendios forestales en Galicia')
+         
+st.write('El presente proyecto tiene como objetivo el análisis de los incendios producidos en Galicia durante el periodo 2001 - 2015, ' +
+         'así como realizar predicciones de la CAUSA de incendios con las características (datos) que el usuarios desea consultar.')
+         
+
+  
+  
+  
+  
+  
+
+# Preprocesar el dataset (renombrar columnas, etc.)
+url = 'https://raw.githubusercontent.com/LenaMorianu/ANALISIS-Y-PREDICCION-DE-LOS-INCENDIOS-FORESTALES-EN-GALICIA/main/Streamlit/dataset_modelo.csv'
+df = pd.read_csv(url, encoding='ISO-8859-1')
+
+df.drop(['Unnamed: 0'], axis=1, inplace=True)
+
+
+df.rename(columns={'superficie':'Superficie_quemada',
+                   'lat':'Latitud',
+                   'lng':'Longitud',
+                   'time_ctrl':'Tiempo_control',
+                   'personal':'Personal',
+                   'medios':'Medios',
+                   'TMEDIA':'Temperatura_media',
+                   'RACHA':'Racha',
+                   'SOL':'Sol',
+                   'AÃ±o':'Ano',
+                   'PRES_RANGE':'Presion',
+                   'target':'Causa'}, inplace=True)
+
+df.head()
+
+
+st.write('')
+st.write('')
+st.write('')
+st.write('El dataset de análisis')
+st.write('')
+st.table(df.head())  
+
+
+
+# Crear los dataset de TRAIN y TEST
+X_train, X_test, y_train, y_test = train_test_split(df.drop(['Causa'], axis = 1),
+                                                    df['Causa'],
+                                                    train_size   = 0.8,
+                                                    random_state = 1234,
+                                                    shuffle      = True,
+                                                    stratify = df['Causa'])
+
+
+
+modelo = RandomForestClassifier(bootstrap = True, 
+                                criterion= 'entropy', 
+                                max_depth=None, 
+                                n_estimators=150,
+                                class_weight='balanced').fit(X_train, y_train)
+
+st.write("El TEST SCORING: {0:.2f} %".format(100 * modelo.score(X_test, y_test)))
+
+#st.table(plot_confusion_matrix(modelo, X_test, y_test, normalize='true'))
+
+
+st.write('')
+st.write('')
+st.write('')
+
+
+#st.table(classification_report(y_test, y_pred))
+
+y_proba = pd.DataFrame(modelo.predict_proba(X_test))
+y_proba.columns = y_proba.columns.map({0:'Intencionado',
+                                       1:'Causa_desconocida',
+                                       2:'Negligencia',
+                                       3:'Fuego_reproducido',
+                                       4:'Rayo'}).astype(str)
+
+st.write('La probabilidad de cada observación de pertenecer a las categorías CAUSAS de incendio:')
+st.write('')
+
+y2 = y_proba.head(10)
+
+st.table(y2)
+  
+  
+  
+  
+#Variables de predicción
+
+st.sidebar.subheader('Valores para predicción:')
+
+var1 = st.sidebar.number_input('Superficie', min_value=0.00, max_value=10000.00, step=100.00)
+var2 = st.sidebar.number_input('Time_ctrl', min_value=0.00, max_value=1000.00, step=50.00)
+#var3 = st.sidebar.selectbox('Precipitación:', ['Si','No'])
+var3 = st.sidebar.number_input('Medios', min_value=0, max_value=50, step=5)
+#var4 = st.sidebar.number_input('Time_ext', min_value=0, max_value=100, step=5)
+var4 = st.sidebar.number_input('PRES_RANGE', min_value=0.00, max_value=15.00, step=1.00) 
+var5 = st.sidebar.number_input('Sol', min_value=0.00, max_value=1000.00, step=50.00)
+var6 = st.sidebar.number_input('Personal', min_value=0, max_value=100, step=5)
+var7 = st.sidebar.number_input('Racha', min_value=0.00, max_value=100.00, step=5.00)
+var8 = st.sidebar.number_input('Longitud', min_value=-10.00, max_value=-6.00, step=0.05)
+var9 = st.sidebar.number_input('Latitud', min_value=41.00, max_value=44.00, step=0.05)
+var10 = st.sidebar.number_input('Año', min_value=2001, max_value=2015, step=1)
+#var11 = st.sidebar.number_input('TMAX', min_value=-30, max_value=50, step=1)
+var11 = st.sidebar.number_input('Temperatura MEDIA', min_value=-30.00, max_value=50.00, step=5.00)
+#var12 = st.sidebar.number_input('Medios', min_value=0, max_value=50, step=5)
+#var13 = st.sidebar.number_input('PRES_RANGE', min_value=0.00, max_value=15.00, step=1.00)  
+  
+st.sidebar.markdown('__________________________________________________________________________')  
+
+#image = Image.open('./images/IMG2.png')
+#st.image(image, caption='UCM')          
+    
+st.sidebar.write('')
+st.sidebar.write('Universidad Complutense de Madrid')
+st.sidebar.write('MÁSTER BIG DATA & DATA SCIENCE')
+st.sidebar.write('Madrid - Septiembre 2021')
+st.sidebar.write('______________________________________________________________________')
+st.sidebar.write('**AUTORES:**')
+st.sidebar.markdown(' - Alejandra García Mosquera')
+st.sidebar.markdown(' - Jorge Gómez Marco')
+st.sidebar.markdown(' - Ana Hernández Villate')
+st.sidebar.markdown(' - Alex Ilundain')
+st.sidebar.markdown(' - Alicia María López Machado')
+st.sidebar.markdown(' - Lenuta Morianu')
+ 
+  
+  
+  
+# Preguntar por el tamaño del dataset de TEST
+test_size = st.sidebar.slider(label = 'Elige el tamaño del dataset de TEST (%):',
+                              min_value=0,
+                              max_value=100,
+                              value=15,
+                              step=1)
+
+boton_prediccion = st.sidebar.button('REALIZAR PREDICCIÓN')
+
+
+# Realizar la predicción
+if boton_prediccion:
+  values =[var1,var2,var3,var4,var5,var6,var7,var8,var9,var10,var11]
+  columnas = list(df.columns.drop(['Causa']))
+  df_pred = pd.DataFrame(values, columnas)
+  pred = [list(df_pred[0])]
+  result = modelo.predict(pred)
+  prob = modelo.predict_proba(pred)
+  
+  
+  if result == 1: st.write('CAUSA incendio: **INTENCIONADO**')
+  if result == 2: st.write('CAUSA incendio: **CAUSA DESCONOCIDA**')
+  if result == 3: st.write('CAUSA incendio: **NEGLIGENCIA INTENCIONADO**')
+  if result == 4: st.write('CAUSA incendio: **FUEGO REPRODUCIDO**')
+  if result == 5: st.write('CAUSA incendio: **RAYO**')
+  
+  
+  
+
