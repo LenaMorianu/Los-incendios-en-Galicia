@@ -97,8 +97,7 @@ classifier = RandomForestClassifier(bootstrap = True,
                                     criterion= 'entropy', 
                                     max_depth=None, 
                                     random_state = 13,
-                                    n_estimators=150,
-                                    class_weight='balanced').fit(X_train_SMOTE, y_train_SMOTE)
+                                    n_estimators=150).fit(X_train_SMOTE, y_train_SMOTE)
 
 classifier.score(X_test, y_test)
 
@@ -108,7 +107,7 @@ LABELS=['Intencionado', 'Causa desconocida', 'Negligencia', 'Fuego reproducido',
 
 st.write('CLASSIFICATION REPORT:')
 st.write('')
-st.markdown(print(classification_report(y_test, y_pred)))
+st.write(print(classification_report(y_test, y_pred)))
 
 
 
