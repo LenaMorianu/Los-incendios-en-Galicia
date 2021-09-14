@@ -14,7 +14,7 @@ La página web ha sido creada utilizando los siguientes ficheros:
 
 - carpeta css y js - pertenecen al framework Boostrap que permite crear interfaces web con CSS y JavaScript
 - carpeta assets - contiene todas las imágenes utilizandas en la página web (autores, imágenes para el apartado INTRODUCCIÓN, PREPROCESADO, etc.)
-- fichero index.html - es la página por defecto o la home de la página web que se muestar al usuario al acceder al sitio web creado
+- fichero index.html - es la página por defecto o la home del sitio web que se muestar al usuario al acceder usando el enlace previamente mostrado.
 
 
 ### Aplicación web:
