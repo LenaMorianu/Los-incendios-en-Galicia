@@ -105,14 +105,14 @@ y_pred = classifier.predict(X_test)
 
 LABELS=['Intencionado', 'Causa desconocida', 'Negligencia', 'Fuego reproducido', ' Rayo']
 
-st.write('CLASSIFICATION REPORT:')
+#st.write('CLASSIFICATION REPORT:')
 st.write('')
-st.write(print(classification_report(y_test, y_pred)))
+#st.write(print(classification_report(y_test, y_pred)))
 
 st.write("El TEST SCORING: {0:.2f} %".format(100 * classifier.score(X_test, y_test)))
 #st.write("El TEST SCORING: {0:.2f} %".format(100 * modelo.score(X_test, y_test)))         
 
-st.table(plot_confusion_matrix(classifier, X_test, y_test, normalize='true'))
+#st.table(plot_confusion_matrix(classifier, X_test, y_test, normalize='true'))
 
 ############
 
