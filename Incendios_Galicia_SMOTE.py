@@ -49,7 +49,7 @@ df.rename(columns={'superficie':'Superficie_quemada',
                    'medios':'Medios',
                    'TMEDIA':'Temperatura_media',
                    'RACHA':'Racha',
-                   'SOL':'Sol',
+                   'SOL':'Sol_horas',
                    'AÃ±o':'Ano',
                    'PRES_RANGE':'Presion',
                    'target':'Causa'}, inplace=True)
@@ -68,26 +68,26 @@ st.table(df.head())
 
 ############
 
-df_1 = df[df['Causa']==1].copy()
-df_1.reset_index(drop=True, inplace=True)
+#df_1 = df[df['Causa']==1].copy()
+#df_1.reset_index(drop=True, inplace=True)
 
-df_resto = df[df['Causa']!=1].copy()
-df_resto.reset_index(drop=True, inplace=True)
+#df_resto = df[df['Causa']!=1].copy()
+#df_resto.reset_index(drop=True, inplace=True)
 
-df_1_6 = df_1.iloc[5600:6720,:]
+#df_1_6 = df_1.iloc[5600:6720,:]
 
 
-df_prueba6 = pd.concat([df_1_6, df_resto])
-df_prueba6.reset_index(drop=True, inplace=True)
+#df_prueba6 = pd.concat([df_1_6, df_resto])
+#df_prueba6.reset_index(drop=True, inplace=True)
 
 ############
 
 
-X_train, X_test, y_train, y_test = train_test_split (df_prueba6.drop(['Causa'],axis=1), 
-                                                     df_prueba6.Causa , 
+X_train, X_test, y_train, y_test = train_test_split (df.drop(['Causa'],axis=1), 
+                                                     df.Causa , 
                                                      test_size = 0.3, 
                                                      random_state = 333, 
-                                                     stratify = df_prueba6.Causa)
+                                                     stratify = df.Causa)
 
 oversample3 = SMOTE(random_state=19, sampling_strategy='all')
 X_train_SMOTE, y_train_SMOTE = oversample3.fit_resample(X_train, y_train)
@@ -109,7 +109,10 @@ st.write('CLASSIFICATION REPORT:')
 st.write('')
 st.write(print(classification_report(y_test, y_pred)))
 
+st.write("El TEST SCORING: {0:.2f} %".format(100 * classifier.score(X_test, y_test)))
+#st.write("El TEST SCORING: {0:.2f} %".format(100 * modelo.score(X_test, y_test)))         
 
+st.table(plot_confusion_matrix(classifier, X_test, y_test, normalize='true'))
 
 ############
 
@@ -166,17 +169,18 @@ st.table(y2)
 
 st.sidebar.subheader('Valores para predicción:')
 
-var1 = st.sidebar.number_input('Superficie', min_value=0.00, max_value=10000.00, step=100.00)
-var2 = st.sidebar.number_input('Time_ctrl', min_value=0.00, max_value=1000.00, step=50.00)
+var1 = st.sidebar.number_input('Superficie_quemada', min_value=0.00, max_value=10000.00, step=100.00)
+var2 = st.sidebar.number_input('Tiempo_control', min_value=0.00, max_value=1000.00, step=50.00)
 var3 = st.sidebar.number_input('Medios', min_value=0, max_value=50, step=5)
-var4 = st.sidebar.number_input('PRES_RANGE', min_value=0.00, max_value=15.00, step=1.00) 
-var5 = st.sidebar.number_input('Sol', min_value=0.00, max_value=1000.00, step=50.00)
+var4 = st.sidebar.number_input('Presion', min_value=0.00, max_value=15.00, step=1.00) 
+var5 = st.sidebar.number_input('Sol_horas', min_value=0.00, max_value=1000.00, step=50.00)
 var6 = st.sidebar.number_input('Personal', min_value=0, max_value=100, step=5)
 var7 = st.sidebar.number_input('Racha', min_value=0.00, max_value=100.00, step=5.00)
 var8 = st.sidebar.number_input('Longitud', min_value=-10.00, max_value=-6.00, step=0.05)
 var9 = st.sidebar.number_input('Latitud', min_value=41.00, max_value=44.00, step=0.05)
-var10 = st.sidebar.number_input('Año', min_value=2001, max_value=2015, step=1)
-var11 = st.sidebar.number_input('Temperatura MEDIA', min_value=-30.00, max_value=50.00, step=5.00)
+var10 = st.sidebar.number_input('Ano', min_value=2001, max_value=2015, step=1)
+var11 = st.sidebar.number_input('Temperatura_media', min_value=-30.00, max_value=50.00, step=5.00)
+
 
 st.write('')
 
