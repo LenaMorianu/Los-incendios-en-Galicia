@@ -22,7 +22,7 @@ st.set_page_config( page_title="Incendios en Galicia",
 
 
 
-st.title('Análisis y predicción de incendios forestales en Galicia')
+st.title('Análisis y predicción de incendios forestales en Galicia - SMOTE')
          
 st.write('El presente proyecto tiene como objetivo el análisis de los incendios producidos en Galicia durante el periodo 2001 - 2015, ' +
          'así como realizar predicciones de la CAUSA de incendios con las características (datos) que el usuarios desea consultar.')
