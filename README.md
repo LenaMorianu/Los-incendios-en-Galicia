@@ -5,7 +5,7 @@ El presente repositorio guarda la información y el código fuente de la aplicac
 
 A través del servicio GitHub Pages ha sido posible crear la página web a la que se accede mediante el siguiente link:
 
-https://lenamorianu.github.io/Los-incendios-en-Galicia/
+<a href > https://lenamorianu.github.io/Los-incendios-en-Galicia/ </a>
 
 ### Página web:
 
