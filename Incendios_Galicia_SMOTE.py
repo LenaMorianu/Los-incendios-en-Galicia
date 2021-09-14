@@ -190,8 +190,7 @@ boton_prediccion = st.sidebar.button('REALIZAR PREDICCIÓN')
 # Realizar la predicción
 if boton_prediccion:
   values =[var1,var2,var3,var4,var5,var6,var7,var8,var9,var10,var11]
-  #columnas = list(df.columns.drop(['Causa']))
-  columnas = list(df_prueba6.columns.drop(['Causa']))
+  columnas = list(df.columns.drop(['Causa']))
   df_pred = pd.DataFrame(values, columnas)  
   pred = [list(df_pred[0])]
   #result = modelo.predict(pred)
