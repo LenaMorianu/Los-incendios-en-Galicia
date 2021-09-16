@@ -101,7 +101,7 @@ st.write("El TEST SCORING: {0:.2f} %".format(100 * modelo.score(X_test, y_test))
 
 #st.table(plot_confusion_matrix(modelo, X_test, y_test, normalize='true'))
 
-
+st.write('__________________________________________________')
 # Realizar la predicción
 if boton_prediccion:
   values =[var1,var2,var3,var4,var5,var6,var7,var8,var9,var10,var11]
@@ -110,8 +110,7 @@ if boton_prediccion:
   pred = [list(df_pred[0])]
   result = modelo.predict(pred)
   prob = modelo.predict_proba(pred)
-  
-  
+    
   if result == 1: st.write('CAUSA incendio: **INTENCIONADO**')
   if result == 2: st.write('CAUSA incendio: **CAUSA DESCONOCIDA**')
   if result == 3: st.write('CAUSA incendio: **NEGLIGENCIA INTENCIONADO**')
@@ -119,11 +118,11 @@ if boton_prediccion:
   if result == 5: st.write('CAUSA incendio: **RAYO**')
 
 
+st.write('__________________________________________________')
 st.write('')
 st.write('')
 st.write('')
 
-st.write('__________________________________________________')
 
 #df.head()
 
