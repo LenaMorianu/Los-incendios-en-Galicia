@@ -152,7 +152,7 @@ if boton_prediccion:
     
   if result == 1: st.button('CAUSA incendio: INTENCIONADO')
   if result == 2: st.button('CAUSA incendio: CAUSA DESCONOCIDA')
-  if result == 3: st.button('CAUSA incendio: NEGLIGENCIA INTENCIONADO')
+  if result == 3: st.button('CAUSA incendio: NEGLIGENCIA')
   if result == 4: st.button('CAUSA incendio: FUEGO REPRODUCIDO')
   if result == 5: st.button('CAUSA incendio: RAYO')
 
