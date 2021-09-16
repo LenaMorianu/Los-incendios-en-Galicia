@@ -125,7 +125,7 @@ LABELS=['Intencionado', 'Causa desconocida', 'Negligencia', 'Fuego reproducido',
 # Definimos funcion para mostrar los resultados
 
 conf_matrix = confusion_matrix(y_test, y_pred, normalize='true')  # confusion_matrix
-fig = plt.figure(figsize=(7, 5))
+fig = plt.figure(figsize=(5, 3))
 sns.heatmap(conf_matrix, xticklabels=LABELS, yticklabels=LABELS, annot=True, fmt="f")
 plt.title("\n Matriz de confusión \n")
 plt.ylabel('REALIDAD \n')
