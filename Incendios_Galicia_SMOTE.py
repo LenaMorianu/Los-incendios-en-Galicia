@@ -126,8 +126,8 @@ if boton_prediccion:
   columnas = list(df.columns.drop(['Causa']))
   df_pred = pd.DataFrame(values, columnas)
   pred = [list(df_pred[0])]
-  result = modelo.predict(pred)
-  prob = modelo.predict_proba(pred)
+  result = classifier.predict(pred)
+  prob = classifier.predict_proba(pred)
     
   if result == 1: st.button('CAUSA incendio: INTENCIONADO')
   if result == 2: st.button('CAUSA incendio: CAUSA DESCONOCIDA')
