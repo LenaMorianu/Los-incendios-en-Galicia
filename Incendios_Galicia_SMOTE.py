@@ -185,8 +185,7 @@ y_proba.columns = y_proba.columns.map({0:'Intencionado',
 st.write('')
 st.write('')
 st.write('')
-
-
+st.write('La MATRIZ DE CONFUSIÓN:')
 
 # Mostrar la matriz de confusión
 
