@@ -40,25 +40,23 @@ url = 'https://raw.githubusercontent.com/LenaMorianu/Los-incendios-en-Galicia/ma
 @st.cache
 def load_data(url):
   data = pd.read_csv(url, encoding='ISO-8859-1')
+  data.drop(['Unnamed: 0'], axis=1, inplace=True)
+  data.rename(columns={'superficie':'Superficie_quemada',
+                       'lat':'Latitud',
+                       'lng':'Longitud',
+                       'time_ctrl':'Tiempo_control',
+                       'personal':'Personal',
+                       'medios':'Medios',
+                       'TMEDIA':'Temperatura_media',
+                       'RACHA':'Racha',
+                       'SOL':'Sol_horas',
+                       'AÃ±o':'Ano',
+                       'PRES_RANGE':'Presion',
+                       'target':'Causa'}, inplace=True)
   return data
 
 df = load_data(url)
 
-df.drop(['Unnamed: 0'], axis=1, inplace=True)
-
-
-df.rename(columns={'superficie':'Superficie_quemada',
-                   'lat':'Latitud',
-                   'lng':'Longitud',
-                   'time_ctrl':'Tiempo_control',
-                   'personal':'Personal',
-                   'medios':'Medios',
-                   'TMEDIA':'Temperatura_media',
-                   'RACHA':'Racha',
-                   'SOL':'Sol_horas',
-                   'AÃ±o':'Ano',
-                   'PRES_RANGE':'Presion',
-                   'target':'Causa'}, inplace=True)
 
 
 #Variables de predicción
