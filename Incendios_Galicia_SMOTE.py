@@ -54,7 +54,6 @@ def load_data(url):
                        'AÃ±o':'Ano',
                        'PRES_RANGE':'Presion',
                        'target':'Causa'}, inplace=True)
-  data.drop(['Ano'], axis=1, inplace=True)
   return data
 
 df = load_data(url)
@@ -74,7 +73,7 @@ var6 = st.sidebar.number_input('Personal', min_value=0, max_value=10000, step=10
 var7 = st.sidebar.number_input('Racha', min_value=0.00, max_value=1000.00, step=10.00)
 var8 = st.sidebar.number_input('Longitud', min_value=-10.00, max_value=-6.00, step=0.05)
 var9 = st.sidebar.number_input('Latitud', min_value=41.00, max_value=44.00, step=0.05)
-#var10 = st.sidebar.number_input('Ano', min_value=2001, max_value=2015, step=1)
+var10 = st.sidebar.number_input('Ano', min_value=2001, max_value=2015, step=1)
 var11 = st.sidebar.number_input('Temperatura_media', min_value=-30.00, max_value=50.00, step=5.00)
 
 st.write('')
@@ -173,7 +172,7 @@ st.write('')
 st.write('')
 st.write('')
 st.write('Ejemplo de observaciones del dataset de análisis:')
-st.table(df_prueba1.sample(n=15, random_state=13))  
+st.table(df_prueba1.sample(n=9, random_state=3))  
 
 df_prueba1.Causa.replace(("intencionado","causa desconocida","negligencia","fuego reproducido","rayo"), (1,2,3,4,5), inplace=True)
 
