@@ -130,12 +130,17 @@ st.write('')
 
 #df.head()
 
+
+
+df.Causa.replace((1,2,3,4,5),("intencionado","causa desconocida","negligencia","fuego reproducido","rayo"),inplace=True)
+
 st.write('')
 st.write('')
 st.write('')
 st.write('Ejemplo de observaciones del dataset de análisis:')
 st.table(df.head())  
 
+df.Causa.replace(("intencionado","causa desconocida","negligencia","fuego reproducido","rayo"), (1,2,3,4,5), inplace=True)
 
 #st.table(classification_report(y_test, y_pred))
 
