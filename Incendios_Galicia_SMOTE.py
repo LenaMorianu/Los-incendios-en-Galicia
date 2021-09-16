@@ -163,7 +163,7 @@ st.write('')
 st.write('')
 
 
-df.Causa.replace((1,2,3,4,5),("intencionado","causa desconocida","negligencia","fuego reproducido","rayo"),inplace=True)
+df_prueba1.Causa.replace((1,2,3,4,5),("intencionado","causa desconocida","negligencia","fuego reproducido","rayo"),inplace=True)
 
 st.write('')
 st.write('')
@@ -171,7 +171,7 @@ st.write('')
 st.write('Ejemplo de observaciones del dataset de análisis:')
 st.table(df_prueba1.head())  
 
-df.Causa.replace(("intencionado","causa desconocida","negligencia","fuego reproducido","rayo"), (1,2,3,4,5), inplace=True)
+df_prueba1.Causa.replace(("intencionado","causa desconocida","negligencia","fuego reproducido","rayo"), (1,2,3,4,5), inplace=True)
 
 
 
