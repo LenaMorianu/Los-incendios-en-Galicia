@@ -53,14 +53,20 @@ df.rename(columns={'superficie':'Superficie_quemada',
                    'PRES_RANGE':'Presion',
                    'target':'Causa'}, inplace=True)
 
-df.head()
 
 
+#df.head()
+
+df.Causa = y_proba.Causa.map({0:'Intencionado',
+                              1:'Causa_desconocida',
+                              2:'Negligencia',
+                              3:'Fuego_reproducido',
+                              4:'Rayo'}).astype(str)
 st.write('')
 st.write('')
 st.write('')
-st.write('El dataset de análisis')
-st.write('')
+st.write('Ejemplo de observaciones del dataset de análisis:')
+st.write('__________________________________________________')
 st.table(df.head())  
 
 
