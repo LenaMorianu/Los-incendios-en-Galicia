@@ -133,7 +133,6 @@ st.write('')
 st.write('')
 st.write('')
 st.write('Ejemplo de observaciones del dataset de análisis:')
-st.write('__________________________________________________')
 st.table(df.head())  
 
 
@@ -150,7 +149,7 @@ st.write('')
 st.write('')
 st.write('')
 st.write('__________________________________________________')
-st.write('La probabilidad de cada observación de pertenecer a las categorías CAUSAS de incendio:')
+st.write('La probabilidad de cada observación de pertenecer a cada CAUSA de incendio:')
 st.write('')
 
 y2 = y_proba.head(10)
