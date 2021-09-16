@@ -98,6 +98,11 @@ modelo = RandomForestClassifier(bootstrap = True,
                                 n_estimators=150,
                                 class_weight='balanced').fit(X_train, y_train)
 
+
+y_pred = modelo.predict(X_test)
+LABELS=['Intencionado', 'Causa desconocida', 'Negligencia', 'Fuego reproducido', ' Rayo']
+
+
 st.write("La capacidad predictiva del modelo - TEST SCORING: {0:.2f} %".format(100 * modelo.score(X_test, y_test)))
 
 #st.table(plot_confusion_matrix(modelo, X_test, y_test, normalize='true'))
@@ -162,7 +167,17 @@ st.write('')
 #st.table(y2)
   
   
-  
+st.write('MATRIZ DE CONFUSIÓN:')
+
+# Mostrar la matriz de confusión
+
+conf_matrix = confusion_matrix(y_test, y_pred, normalize='true')  # confusion_matrix
+fig = plt.figure(figsize=(10, 7))
+sns.heatmap(conf_matrix, xticklabels=LABELS, yticklabels=LABELS, annot=True, fmt="f")
+plt.title("\n Matriz de confusión \n")
+plt.ylabel('REALIDAD \n')
+plt.xlabel('\n PREDICCIÓN')
+st.pyplot(fig)  
   
   
 st.sidebar.markdown('__________________________________________________________________________')  
