@@ -122,15 +122,7 @@ y_pred = classifier.predict(X_test)
 LABELS=['Intencionado', 'Causa desconocida', 'Negligencia', 'Fuego reproducido', ' Rayo']
 
 
-# Definimos funcion para mostrar los resultados
 
-conf_matrix = confusion_matrix(y_test, y_pred, normalize='true')  # confusion_matrix
-fig = plt.figure(figsize=(10, 7))
-sns.heatmap(conf_matrix, xticklabels=LABELS, yticklabels=LABELS, annot=True, fmt="f")
-plt.title("\n Matriz de confusión \n")
-plt.ylabel('REALIDAD \n')
-plt.xlabel('\n PREDICCIÓN')
-st.pyplot(fig)
 
     
 #mostrar_resultados1(y_test, y_pred)
@@ -138,23 +130,6 @@ st.pyplot(fig)
 
 
 ############
-
-
-#X_train, X_test, y_train, y_test = train_test_split (df.drop(['Causa'],axis=1), 
-#                                                     df.Causa , 
-#                                                     test_size = 0.3, 
-#                                                     random_state = 1234, 
-#                                                     stratify = df.Causa)
-
-#oversample3 = SMOTE(random_state=19, sampling_strategy='all')
-#X_train_SMOTE, y_train_SMOTE = oversample3.fit_resample(X_train, y_train)
-
-
-#classifier = RandomForestClassifier(bootstrap = True, 
-#                                    criterion= 'entropy', 
-#                                    max_depth=None, 
-#                                    random_state = 13,
-#                                    n_estimators=150).fit(X_train_SMOTE, y_train_SMOTE)
 
 
 st.write("La capacidad predictiva del modelo - TEST SCORING: {0:.2f} %".format(100 * classifier.score(X_test, y_test)))
@@ -210,25 +185,19 @@ y_proba.columns = y_proba.columns.map({0:'Intencionado',
 st.write('')
 st.write('')
 st.write('')
-#st.write('La probabilidad de cada observación de pertenecer a cada CAUSA de incendio:')
-#st.write('')
-
-#classifier.score(X_test, y_test)
-
-#st.write('CLASSIFICATION REPORT:')
-#st.write(print(classification_report(y_test, y_pred)))
-
-
-#st.table(plot_confusion_matrix(classifier, X_test, y_test, normalize='true'))
-
-############     
-
-#st.table(plot_confusion_matrix(modelo, X_test, y_test, normalize='true'))
 
 
 
+# Mostrar la matriz de confusión
 
-#st.table(classification_report(y_test, y_pred))
+conf_matrix = confusion_matrix(y_test, y_pred, normalize='true')  # confusion_matrix
+fig = plt.figure(figsize=(10, 7))
+sns.heatmap(conf_matrix, xticklabels=LABELS, yticklabels=LABELS, annot=True, fmt="f")
+plt.title("\n Matriz de confusión \n")
+plt.ylabel('REALIDAD \n')
+plt.xlabel('\n PREDICCIÓN')
+st.pyplot(fig)
+
 
   
 st.sidebar.markdown('__________________________________________________________________________')  
