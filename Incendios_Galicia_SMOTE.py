@@ -118,12 +118,13 @@ classifier = RandomForestClassifier(bootstrap = True,
 
 #classifier.score(X_test, y_test)
 
+y_pred = classifier.predict(X_test)
 LABELS=['Intencionado', 'Causa desconocida', 'Negligencia', 'Fuego reproducido', ' Rayo']
 
 
 # Definimos funcion para mostrar los resultados
 
-conf_matrix = confusion_matrix(y_test1, y_pred1, normalize='true')  # confusion_matrix
+conf_matrix = confusion_matrix(y_test, y_pred, normalize='true')  # confusion_matrix
 plt.figure(figsize=(10, 7))
 sns.heatmap(conf_matrix, xticklabels=LABELS, yticklabels=LABELS, annot=True, fmt="f")
 plt.title("\n Matriz de confusión \n")
