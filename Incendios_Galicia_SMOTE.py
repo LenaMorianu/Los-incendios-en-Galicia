@@ -54,7 +54,7 @@ def load_data(url):
                        'AÃ±o':'Ano',
                        'PRES_RANGE':'Presion',
                        'target':'Causa'}, inplace=True)
-  data.drop(['Causa'], axis=1, inplace=True)
+  data.drop(['Ano'], axis=1, inplace=True)
   return data
 
 df = load_data(url)
