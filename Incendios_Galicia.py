@@ -94,6 +94,7 @@ X_train, X_test, y_train, y_test = train_test_split(df.drop(['Causa'], axis = 1)
 modelo = RandomForestClassifier(bootstrap = True, 
                                 criterion= 'entropy', 
                                 max_depth=None, 
+                                random_state=13,
                                 n_estimators=150,
                                 class_weight='balanced').fit(X_train, y_train)
 
