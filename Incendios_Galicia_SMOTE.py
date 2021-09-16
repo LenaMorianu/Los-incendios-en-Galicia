@@ -121,17 +121,17 @@ LABELS=['Intencionado', 'Causa desconocida', 'Negligencia', 'Fuego reproducido',
 
 
 # Definimos funcion para mostrar los resultados
-def mostrar_resultados1(y_test1, y_pred1):
-    conf_matrix = confusion_matrix(y_test1, y_pred1, normalize='true')  # confusion_matrix
-    plt.figure(figsize=(10, 7))
-    sns.heatmap(conf_matrix, xticklabels=LABELS, yticklabels=LABELS, annot=True, fmt="f")
-    plt.title("\n Matriz de confusión \n")
-    plt.ylabel('REALIDAD \n')
-    plt.xlabel('\n PREDICCIÓN')
-    plt.show()
-    #print ("\n CLASSIFICATION REPORT : \n ", classification_report(y_test1, y_pred1))
+
+conf_matrix = confusion_matrix(y_test1, y_pred1, normalize='true')  # confusion_matrix
+plt.figure(figsize=(10, 7))
+sns.heatmap(conf_matrix, xticklabels=LABELS, yticklabels=LABELS, annot=True, fmt="f")
+plt.title("\n Matriz de confusión \n")
+plt.ylabel('REALIDAD \n')
+plt.xlabel('\n PREDICCIÓN')
+st.plt.show()
+
     
-mostrar_resultados1(y_test, y_pred)
+#mostrar_resultados1(y_test, y_pred)
 
 
 
