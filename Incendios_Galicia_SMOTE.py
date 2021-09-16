@@ -83,36 +83,76 @@ boton_prediccion = st.sidebar.button('REALIZAR PREDICCIÓN')
 
 ############
 
-#df_1 = df[df['Causa']==1].copy()
-#df_1.reset_index(drop=True, inplace=True)
+df_1 = df[df['Causa']==1].copy()
+df_1.reset_index(drop=True, inplace=True )
 
-#df_resto = df[df['Causa']!=1].copy()
-#df_resto.reset_index(drop=True, inplace=True)
+df_resto = df[df['Causa']!=1].copy()
+df_resto.reset_index(drop=True, inplace=True )
 
-#df_1_6 = df_1.iloc[5600:6720,:]
+df_1_1 = df_1.iloc[:5646,:]
+
+df_1_2 = df_1.iloc[5646:,:]
+
+df_prueba1 = pd.concat([df_1_1, df_resto])
+df_prueba1.reset_index(drop=True, inplace=True)
+
+df_prueba2 = pd.concat([df_1_2, df_resto])
+df_prueba2.reset_index(drop=True, inplace=True)
 
 
-#df_prueba6 = pd.concat([df_1_6, df_resto])
-#df_prueba6.reset_index(drop=True, inplace=True)
+X_train, X_test, y_train, y_test = train_test_split (df_prueba1.drop(['Causa'],axis=1), 
+                                                     df_prueba1.Causa , 
+                                                     test_size = 0.3, 
+                                                     random_state = 13, 
+                                                     stratify = df_prueba1.Causa)
+
+oversample1 = SMOTE(random_state=19, sampling_strategy='all')
+X_train_SMOTE, y_train_SMOTE = oversample1.fit_resample(X_train, y_train)
+
+classifier = RandomForestClassifier(bootstrap = True, 
+                                    criterion= 'entropy', 
+                                    max_depth=None,
+                                    random_state = 333,
+                                    n_estimators=150).fit(X_train_SMOTE, y_train_SMOTE)
+
+#classifier.score(X_test, y_test)
+
+LABELS=['Intencionado', 'Causa desconocida', 'Negligencia', 'Fuego reproducido', ' Rayo']
+
+
+# Definimos funcion para mostrar los resultados
+def mostrar_resultados1(y_test1, y_pred1):
+    conf_matrix = confusion_matrix(y_test1, y_pred1, normalize='true')  # confusion_matrix
+    plt.figure(figsize=(10, 7))
+    sns.heatmap(conf_matrix, xticklabels=LABELS, yticklabels=LABELS, annot=True, fmt="f")
+    plt.title("\n Matriz de confusión \n")
+    plt.ylabel('REALIDAD \n')
+    plt.xlabel('\n PREDICCIÓN')
+    plt.show()
+    #print ("\n CLASSIFICATION REPORT : \n ", classification_report(y_test1, y_pred1))
+    
+mostrar_resultados1(y_test, y_pred)
+
+
 
 ############
 
 
-X_train, X_test, y_train, y_test = train_test_split (df.drop(['Causa'],axis=1), 
-                                                     df.Causa , 
-                                                     test_size = 0.3, 
-                                                     random_state = 1234, 
-                                                     stratify = df.Causa)
+#X_train, X_test, y_train, y_test = train_test_split (df.drop(['Causa'],axis=1), 
+#                                                     df.Causa , 
+#                                                     test_size = 0.3, 
+#                                                     random_state = 1234, 
+#                                                     stratify = df.Causa)
 
-oversample3 = SMOTE(random_state=19, sampling_strategy='all')
-X_train_SMOTE, y_train_SMOTE = oversample3.fit_resample(X_train, y_train)
+#oversample3 = SMOTE(random_state=19, sampling_strategy='all')
+#X_train_SMOTE, y_train_SMOTE = oversample3.fit_resample(X_train, y_train)
 
 
-classifier = RandomForestClassifier(bootstrap = True, 
-                                    criterion= 'entropy', 
-                                    max_depth=None, 
-                                    random_state = 13,
-                                    n_estimators=150).fit(X_train_SMOTE, y_train_SMOTE)
+#classifier = RandomForestClassifier(bootstrap = True, 
+#                                    criterion= 'entropy', 
+#                                    max_depth=None, 
+#                                    random_state = 13,
+#                                    n_estimators=150).fit(X_train_SMOTE, y_train_SMOTE)
 
 
 st.write("La capacidad predictiva del modelo - TEST SCORING: {0:.2f} %".format(100 * classifier.score(X_test, y_test)))
@@ -127,7 +167,7 @@ st.write('__________________________________________________')
 # Realizar la predicción
 if boton_prediccion:
   values =[var1,var2,var3,var4,var5,var6,var7,var8,var9,var10,var11]
-  columnas = list(df.columns.drop(['Causa']))
+  columnas = list(df_prueba1.columns.drop(['Causa']))
   df_pred = pd.DataFrame(values, columnas)
   pred = [list(df_pred[0])]
   result = classifier.predict(pred)
@@ -152,7 +192,7 @@ st.write('')
 st.write('')
 st.write('')
 st.write('Ejemplo de observaciones del dataset de análisis:')
-st.table(df.head())  
+st.table(df_prueba1.head())  
 
 df.Causa.replace(("intencionado","causa desconocida","negligencia","fuego reproducido","rayo"), (1,2,3,4,5), inplace=True)
 
