@@ -130,7 +130,7 @@ sns.heatmap(conf_matrix, xticklabels=LABELS, yticklabels=LABELS, annot=True, fmt
 plt.title("\n Matriz de confusión \n")
 plt.ylabel('REALIDAD \n')
 plt.xlabel('\n PREDICCIÓN')
-st.plt.show()
+plt.show()
 
     
 #mostrar_resultados1(y_test, y_pred)
