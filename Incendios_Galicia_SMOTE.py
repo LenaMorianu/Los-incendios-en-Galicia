@@ -116,7 +116,7 @@ X_train_SMOTE, y_train_SMOTE = oversample1.fit_resample(X_train, y_train)
 classifier = RandomForestClassifier(bootstrap = True, 
                                     criterion= 'entropy', 
                                     max_depth=None,
-                                    random_state = 333,
+                                    random_state = 95721, #333 # 13
                                     n_estimators=150).fit(X_train_SMOTE, y_train_SMOTE)
 
 #classifier.score(X_test, y_test)
