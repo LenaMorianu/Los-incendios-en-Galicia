@@ -57,7 +57,7 @@ df.rename(columns={'superficie':'Superficie_quemada',
 
 #df.head()
 
-df.Causa = y_proba.Causa.map({0:'Intencionado',
+df.Causa = df.Causa.map({0:'Intencionado',
                               1:'Causa_desconocida',
                               2:'Negligencia',
                               3:'Fuego_reproducido',
@@ -69,6 +69,12 @@ st.write('Ejemplo de observaciones del dataset de análisis:')
 st.write('__________________________________________________')
 st.table(df.head())  
 
+
+df.Causa = df.Causa.map({'Intencionado':0,
+                         'Causa_desconocida':1,
+                         'Negligencia':2,
+                         'Fuego_reproducido':3,
+                         'Rayo':4}).astype(int)
 
 
 # Crear los dataset de TRAIN y TEST
