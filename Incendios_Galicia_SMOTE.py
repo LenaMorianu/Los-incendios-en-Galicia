@@ -36,7 +36,7 @@ st.write('Para realizar una predicción, introduce los datos/características en
   
 
 # Preprocesar el dataset (renombrar columnas, etc.)
-url = 'https://raw.githubusercontent.com/LenaMorianu/Los-incendios-en-Galicia/main/dataset_modelo.csv'
+url = 'https://raw.githubusercontent.com/TFM123456/Big_Data_and_Data_Science_UCM/main/dataset_modelo.csv'
 
 @st.cache
 def load_data(url):
