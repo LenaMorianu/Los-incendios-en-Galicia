@@ -169,7 +169,7 @@ st.write('')
 st.write('')
 st.write('')
 st.write('Ejemplo de observaciones del dataset de análisis:')
-st.table(df_prueba1.head())  
+st.table(df_prueba1.sample(n=15, random_state=1))  
 
 df_prueba1.Causa.replace(("intencionado","causa desconocida","negligencia","fuego reproducido","rayo"), (1,2,3,4,5), inplace=True)
 
