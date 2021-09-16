@@ -38,7 +38,11 @@ st.write('Para realizar una predicción, introduce los datos/características en
 url = 'https://raw.githubusercontent.com/LenaMorianu/Los-incendios-en-Galicia/main/dataset_modelo.csv'
 
 @st.cache
-df = pd.read_csv(url, encoding='ISO-8859-1')
+def load_data(url):
+  data = pd.read_csv(url, encoding='ISO-8859-1')
+  return data
+
+df = load_data(url)
 
 df.drop(['Unnamed: 0'], axis=1, inplace=True)
 
