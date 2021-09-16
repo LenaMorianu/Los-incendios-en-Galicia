@@ -29,7 +29,9 @@ st.write('El presente proyecto tiene como objetivo el análisis de los incendios
 
   
   
-  
+st.write('')
+st.write('Para realizar una predicción, introduce los datos/características en los campos de la izquierda. El resultado de la predicción se mostrará a continuación.')
+
   
   
 
@@ -55,14 +57,28 @@ df.rename(columns={'superficie':'Superficie_quemada',
 
 
 
-#df.head()
+#Variables de predicción
+
+st.sidebar.subheader('Valores para predicción:')
+
+var1 = st.sidebar.number_input('Superficie_quemada', min_value=0.00, max_value=10000.00, step=100.00)
+var2 = st.sidebar.number_input('Tiempo_control', min_value=0.00, max_value=1000.00, step=50.00)
+var3 = st.sidebar.number_input('Medios', min_value=0, max_value=50000, step=5)
+var4 = st.sidebar.number_input('Presion', min_value=0.00, max_value=10000.00, step=10.00) 
+var5 = st.sidebar.number_input('Sol_horas', min_value=0.00, max_value=1000.00, step=3.00)
+var6 = st.sidebar.number_input('Personal', min_value=0, max_value=10000, step=10)
+var7 = st.sidebar.number_input('Racha', min_value=0.00, max_value=1000.00, step=10.00)
+var8 = st.sidebar.number_input('Longitud', min_value=-10.00, max_value=-6.00, step=0.05)
+var9 = st.sidebar.number_input('Latitud', min_value=41.00, max_value=44.00, step=0.05)
+var10 = st.sidebar.number_input('Ano', min_value=2001, max_value=2015, step=1)
+var11 = st.sidebar.number_input('Temperatura_media', min_value=-30.00, max_value=50.00, step=5.00)
 
 st.write('')
-st.write('')
-st.write('')
-st.write('Ejemplo de observaciones del dataset de análisis:')
-st.write('__________________________________________________')
-st.table(df.head())  
+
+boton_prediccion = st.sidebar.button('REALIZAR PREDICCIÓN')
+
+
+
 
 
 # Crear los dataset de TRAIN y TEST
@@ -86,51 +102,6 @@ st.write("El TEST SCORING: {0:.2f} %".format(100 * modelo.score(X_test, y_test))
 #st.table(plot_confusion_matrix(modelo, X_test, y_test, normalize='true'))
 
 
-st.write('')
-st.write('')
-st.write('')
-
-
-#st.table(classification_report(y_test, y_pred))
-
-y_proba = pd.DataFrame(modelo.predict_proba(X_test))
-y_proba.columns = y_proba.columns.map({0:'Intencionado',
-                                       1:'Causa_desconocida',
-                                       2:'Negligencia',
-                                       3:'Fuego_reproducido',
-                                       4:'Rayo'}).astype(str)
-
-st.write('La probabilidad de cada observación de pertenecer a las categorías CAUSAS de incendio:')
-st.write('')
-
-y2 = y_proba.head(10)
-
-st.table(y2)
-  
-  
-  
-  
-#Variables de predicción
-
-st.sidebar.subheader('Valores para predicción:')
-
-var1 = st.sidebar.number_input('Superficie_quemada', min_value=0.00, max_value=10000.00, step=100.00)
-var2 = st.sidebar.number_input('Tiempo_control', min_value=0.00, max_value=1000.00, step=50.00)
-var3 = st.sidebar.number_input('Medios', min_value=0, max_value=50000, step=5)
-var4 = st.sidebar.number_input('Presion', min_value=0.00, max_value=10000.00, step=10.00) 
-var5 = st.sidebar.number_input('Sol_horas', min_value=0.00, max_value=1000.00, step=3.00)
-var6 = st.sidebar.number_input('Personal', min_value=0, max_value=10000, step=10)
-var7 = st.sidebar.number_input('Racha', min_value=0.00, max_value=1000.00, step=10.00)
-var8 = st.sidebar.number_input('Longitud', min_value=-10.00, max_value=-6.00, step=0.05)
-var9 = st.sidebar.number_input('Latitud', min_value=41.00, max_value=44.00, step=0.05)
-var10 = st.sidebar.number_input('Ano', min_value=2001, max_value=2015, step=1)
-var11 = st.sidebar.number_input('Temperatura_media', min_value=-30.00, max_value=50.00, step=5.00)
-
-st.write('')
-
-boton_prediccion = st.sidebar.button('REALIZAR PREDICCIÓN')
-
-
 # Realizar la predicción
 if boton_prediccion:
   values =[var1,var2,var3,var4,var5,var6,var7,var8,var9,var10,var11]
@@ -146,8 +117,47 @@ if boton_prediccion:
   if result == 3: st.write('CAUSA incendio: **NEGLIGENCIA INTENCIONADO**')
   if result == 4: st.write('CAUSA incendio: **FUEGO REPRODUCIDO**')
   if result == 5: st.write('CAUSA incendio: **RAYO**')
-  
 
+
+st.write('')
+st.write('')
+st.write('')
+
+st.write('__________________________________________________')
+
+#df.head()
+
+st.write('')
+st.write('')
+st.write('')
+st.write('Ejemplo de observaciones del dataset de análisis:')
+st.write('__________________________________________________')
+st.table(df.head())  
+
+
+#st.table(classification_report(y_test, y_pred))
+
+y_proba = pd.DataFrame(modelo.predict_proba(X_test))
+y_proba.columns = y_proba.columns.map({0:'Intencionado',
+                                       1:'Causa_desconocida',
+                                       2:'Negligencia',
+                                       3:'Fuego_reproducido',
+                                       4:'Rayo'}).astype(str)
+
+st.write('')
+st.write('')
+st.write('')
+st.write('__________________________________________________')
+st.write('La probabilidad de cada observación de pertenecer a las categorías CAUSAS de incendio:')
+st.write('')
+
+y2 = y_proba.head(10)
+
+st.table(y2)
+  
+  
+  
+  
   
 st.sidebar.markdown('__________________________________________________________________________')  
 
