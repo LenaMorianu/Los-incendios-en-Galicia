@@ -3,7 +3,7 @@
 
 El presente repositorio guarda la información y el código fuente de la aplicación y de la página web creadas con el objetivo de exponer las distintas partes del trabajo fin de máster realizado por el grupo 3 - UCM, Big Data & Data Science.
 
-A través del servicio GitHub Pages ha sido posible crear la página web a la que se accede mediante el siguiente link: [Sitio WEB - Análisis y predicción de las causas de incendios forestales en Galicia](https://lenamorianu.github.io/Los-incendios-en-Galicia/). 
+La página web ha sido creada a través del servicio GitHub Pages y a la que se accede mediante el siguiente link: [Sitio WEB - Análisis y predicción de las causas de incendios forestales en Galicia](https://lenamorianu.github.io/Los-incendios-en-Galicia/). 
 
 ### Página web:
 
