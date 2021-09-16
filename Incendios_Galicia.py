@@ -148,13 +148,12 @@ y_proba.columns = y_proba.columns.map({0:'Intencionado',
 st.write('')
 st.write('')
 st.write('')
-st.write('__________________________________________________')
-st.write('La probabilidad de cada observación de pertenecer a cada CAUSA de incendio:')
-st.write('')
+#st.write('La probabilidad de cada observación de pertenecer a cada CAUSA de incendio:')
+#st.write('')
 
-y2 = y_proba.head(10)
+#y2 = y_proba.head(10)
 
-st.table(y2)
+#st.table(y2)
   
   
   
