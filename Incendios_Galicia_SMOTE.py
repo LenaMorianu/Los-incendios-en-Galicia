@@ -97,8 +97,8 @@ df_1_2 = df_1.iloc[5646:,:]
 df_prueba1 = pd.concat([df_1_1, df_resto])
 df_prueba1.reset_index(drop=True, inplace=True)
 
-df_prueba2 = pd.concat([df_1_2, df_resto])
-df_prueba2.reset_index(drop=True, inplace=True)
+#df_prueba2 = pd.concat([df_1_2, df_resto])
+#df_prueba2.reset_index(drop=True, inplace=True)
 
 
 X_train, X_test, y_train, y_test = train_test_split (df_prueba1.drop(['Causa'],axis=1), 
@@ -125,12 +125,12 @@ LABELS=['Intencionado', 'Causa desconocida', 'Negligencia', 'Fuego reproducido',
 # Definimos funcion para mostrar los resultados
 
 conf_matrix = confusion_matrix(y_test, y_pred, normalize='true')  # confusion_matrix
-plt.figure(figsize=(10, 7))
+fig = plt.figure(figsize=(10, 7))
 sns.heatmap(conf_matrix, xticklabels=LABELS, yticklabels=LABELS, annot=True, fmt="f")
 plt.title("\n Matriz de confusión \n")
 plt.ylabel('REALIDAD \n')
 plt.xlabel('\n PREDICCIÓN')
-plt.show()
+st.pyplot(fig)
 
     
 #mostrar_resultados1(y_test, y_pred)
