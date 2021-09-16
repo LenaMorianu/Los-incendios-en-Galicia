@@ -115,7 +115,7 @@ if boton_prediccion:
   result = modelo.predict(pred)
   prob = modelo.predict_proba(pred)
     
-  if result == 1: st.write('CAUSA incendio: **INTENCIONADO**')
+  if result == 1: st.botton('CAUSA incendio: **INTENCIONADO**')
   if result == 2: st.write('CAUSA incendio: **CAUSA DESCONOCIDA**')
   if result == 3: st.write('CAUSA incendio: **NEGLIGENCIA INTENCIONADO**')
   if result == 4: st.write('CAUSA incendio: **FUEGO REPRODUCIDO**')
